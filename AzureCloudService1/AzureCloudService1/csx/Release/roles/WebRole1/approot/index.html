@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="input" onkeypress="testJson()" />
+
+    <div id="jsonDiv"></div>
+    <script>
+        function testJson() {
+            var input = { input: $("#input").val().trim() };
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/GetChildrenS",
+                data: JSON.stringify(input),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    
+                    var t = "<p>" + data.d + "</p>";
+
+                    $("#jsonDiv").html(t);
+                },
+                error: function (data) {
+                    //Console.log(data.d);
+                }
+
+            });
+        }
+    </script>
+
+</body>
+</html>
